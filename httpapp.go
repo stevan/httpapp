@@ -36,21 +36,21 @@ func (e *Env) Set (key string, value interface{}) {
 
 func NewResponse (status int) *Response {
     resp := new(Response)
-    resp.Status  = status
-    resp.Headers = make(http.Header)
-    resp.Body    = new(bytes.Buffer)
+    resp.Status = status
+    resp.Header = make(http.Header)
+    resp.Body   = new(bytes.Buffer)
     return resp
 }
 
 type Response struct {
-    Status  int
-    Headers http.Header
-    Body    *bytes.Buffer
+    Status int
+    Header http.Header
+    Body   *bytes.Buffer
 }
 
 func (r *Response) WriteTo (w http.ResponseWriter) {
-    out := map[string][]string(r.Headers)
-    in  := map[string][]string(w.Header())
+    out := r.Header
+    in  := w.Header()
     for k, v := range out { in[k] = v }
     w.WriteHeader(r.Status)
     r.Body.WriteTo(w)

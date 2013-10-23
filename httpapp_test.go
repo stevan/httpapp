@@ -15,6 +15,7 @@ func (app *TestApp) ServeHTTP (w http.ResponseWriter, r *http.Request) {
 
 func (app *TestApp) Call (e *Env) *Response {
     resp := NewResponse(200)
+    resp.Header.Add("Content-Length", "7")
     resp.Body.Write([]byte("HELLO WORLD"))
     return resp
 }
@@ -38,6 +39,14 @@ func TestSimpleApp (t *testing.T) {
 
     if w.Body.String() != "HELLO WORLD" {
         t.Errorf("got wrong body - got: %v expected: %v", w.Body.String(), "HELLO WORLD")
+    }
+
+    if w.Header().Get("Content-Length") != "7" {
+        t.Errorf(
+            "got wrong header value - got: %v expected: %v",
+            w.Header().Get("Content-Length"),
+            "7",
+        )
     }
 }
 
