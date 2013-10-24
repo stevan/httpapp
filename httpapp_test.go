@@ -18,7 +18,7 @@ func (app *TestApp) Call (e *Env) *Response {
     switch path {
         case "/simple":
             resp := NewResponse(200)
-            resp.Header.Add("Content-Length", "7")
+            resp.Headers.Add("Content-Length", "7")
             resp.Body.Write([]byte("HELLO WORLD"))
             return resp
         case "/empty":
@@ -38,7 +38,6 @@ func TestSimpleApp (t *testing.T) {
 
     w := httptest.NewRecorder()
     app.ServeHTTP(w, req)
-
 
     if w.Code != 200 {
         t.Errorf("got wrong status - got: %v expected: %v", w.Code, 200)
@@ -68,7 +67,6 @@ func TestEmptyApp (t *testing.T) {
 
     w := httptest.NewRecorder()
     app.ServeHTTP(w, req)
-
 
     if w.Code != 204 {
         t.Errorf("got wrong status - got: %v expected: %v", w.Code, 204)
