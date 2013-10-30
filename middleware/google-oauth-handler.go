@@ -16,7 +16,7 @@ import (
 
 // Simple user objects ...
 
-type GoogleGoogleUserInfo struct {
+type GoogleUserInfo struct {
     Id       string `json:"id"`
     Email    string `json:"email"`
     Verified bool   `json:"verified_email"`
