@@ -1,15 +1,13 @@
 package component
 
 import (
-    "net/http"
+	"net/http"
 )
 
-func ServeFiles (root string) *FileServerComponent {
-    return &FileServerComponent{root}
+func ServeFiles(root string) *FileServerComponent {
+	return &FileServerComponent{root}
 }
 
-func URLMapper () *URLMapComponent {
-    return &URLMapComponent{http.DefaultServeMux}
+func URLMapper() *URLMapComponent {
+	return &URLMapComponent{http.DefaultServeMux}
 }
-
-
