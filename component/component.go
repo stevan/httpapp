@@ -11,3 +11,7 @@ func ServeFiles(root string) *FileServerComponent {
 func URLMapper() *URLMapComponent {
 	return &URLMapComponent{http.DefaultServeMux}
 }
+
+func Redirect(location string) *RedirectComponent {
+	return &RedirectComponent{location}
+}
